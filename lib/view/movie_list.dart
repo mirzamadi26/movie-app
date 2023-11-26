@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movie_app/model/movie_model.dart';
-import 'package:movie_app/serviice/api_service.dart';
+import 'package:movie_app/services/api_service.dart';
 import 'package:movie_app/view/components/favorite_icon.dart';
 import 'package:movie_app/view/components/movie_card.dart';
 import 'package:movie_app/widgets/text.dart';
@@ -38,11 +38,13 @@ class _MovieListScreenState extends State<MovieListScreen> {
               itemBuilder: (context, index) {
                 final movie = movies[index];
                 return MovieCardWidget(
-                    id: movie.id,
-                    posterUrl: movie.posterUrl,
-                    title: movie.title,
-                    releaseDate: movie.releaseDate,
-                    overview: movie.overview);
+                  id: movie.id,
+                  posterUrl: movie.posterUrl,
+                  title: movie.title,
+                  releaseDate: movie.releaseDate,
+                  overview: movie.overview,
+                  show: true,
+                );
               },
             );
           }

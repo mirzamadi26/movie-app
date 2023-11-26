@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/serviice/shared_preferences.dart';
+import 'package:movie_app/services/shared_preferences.dart';
 
 class FavoriteIcon extends StatefulWidget {
   final int movieId;

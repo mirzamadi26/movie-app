@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:movie_app/serviice/api_service.dart';
-import 'package:movie_app/serviice/shared_preferences.dart';
+import 'package:movie_app/services/api_service.dart';
+import 'package:movie_app/services/shared_preferences.dart';
 import 'package:movie_app/view/components/movie_card.dart';
 import 'package:movie_app/widgets/text.dart';
 
@@ -46,6 +46,14 @@ class _FavoriteMoviesScreenState extends State<FavoriteMoviesScreen> {
                 );
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
+              } else if (snapshot.data!.isEmpty) {
+                return Center(
+                  child: modified_text(
+                    text: "No Favorite Movie....",
+                    size: 24,
+                    color: Colors.white,
+                  ),
+                );
               } else {
                 final List<Map<String, dynamic>>? favoriteMovies =
                     snapshot.data;
@@ -53,13 +61,16 @@ class _FavoriteMoviesScreenState extends State<FavoriteMoviesScreen> {
                   itemCount: favoriteMovies!.length,
                   itemBuilder: (context, index) {
                     final Map<String, dynamic> movie = favoriteMovies[index];
+                    getFavoriteMovies();
                     return MovieCardWidget(
-                        id: movie['id'],
-                        posterUrl:
-                            'https://image.tmdb.org/t/p/w300${movie['poster_path']}',
-                        title: movie['title'],
-                        releaseDate: movie['release_date'],
-                        overview: movie['overview']);
+                      id: movie['id'],
+                      posterUrl:
+                          'https://image.tmdb.org/t/p/w300${movie['poster_path']}',
+                      title: movie['title'],
+                      releaseDate: movie['release_date'],
+                      overview: movie['overview'],
+                      show: false,
+                    );
                   },
                 );
               }

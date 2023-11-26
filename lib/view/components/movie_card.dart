@@ -4,6 +4,7 @@ import 'package:movie_app/widgets/text.dart';
 
 class MovieCardWidget extends StatelessWidget {
   final int id;
+  final bool show;
   final String posterUrl;
   final String title;
   final String releaseDate;
@@ -14,7 +15,8 @@ class MovieCardWidget extends StatelessWidget {
       required this.posterUrl,
       required this.title,
       required this.releaseDate,
-      required this.overview});
+      required this.overview,
+      required this.show});
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +57,16 @@ class MovieCardWidget extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        Positioned(
-                          top: 8,
-                          right: 8,
-                          child: CircleAvatar(
-                              child: FavoriteIcon(
-                            movieId: id,
-                          )),
-                        ),
+                        if (show == true) ...{
+                          Positioned(
+                            top: 8,
+                            right: 8,
+                            child: CircleAvatar(
+                                child: FavoriteIcon(
+                              movieId: id,
+                            )),
+                          ),
+                        }
                       ]),
                     ),
                     SizedBox(
